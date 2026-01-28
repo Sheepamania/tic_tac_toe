@@ -9,14 +9,23 @@ function Square({value, onSqureClick}) {
 //defines the game board
 export default function Board() {
 
+  //Each time a player moves, bool xIsNext will be flipped 
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
 
   function handleClick(i){
     const nextSquares = squares.slice();
-    nextSquares[i] = "x";
+
+    if (xIsNext){
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
+
 
     // Set the value of the "nextSquare"
     setSquares(nextSquares);
+    setXIsNext(!xIsNext); //flips the bool after each turn
   }
 
   return (
